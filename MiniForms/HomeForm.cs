@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniForms.Modules;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,29 +20,38 @@ namespace MiniForms
             InitializeComponent();
         }
 
-        private void rtbModule_DoubleClick(object sender, EventArgs e)
+        private void lbModules_DoubleClick(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnExecute_Click(object sender, EventArgs e)
+        {
+            var projectDirectory = generateProjectFolder();
+            var module = new FileInModule("C:\\Temp", projectDirectory);
+            bool result = module.Execute();
+
+            if(result == false)
+            {
+                MessageBox.Show("Uitvoeren niet gelukt!");
+            }
             
+            
+        }
+        private string generateProjectFolder()
+        {
+            // Setup desination folder
+            var projectDirectory = Environment.CurrentDirectory;
 
-            if (rtbModule.SelectedText == "FolderIn")
-            {
+            var folderName = Guid.NewGuid().ToString();
+            string directory = projectDirectory + "\\Process\\" + folderName;
 
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.ShowDialog();
-            }
-            else if(rtbModule.SelectedText == "FolderOut")
+            // Create project folder/directory
+            if (!Directory.Exists(directory))
             {
-                OpenFileDialog dlg = new OpenFileDialog();
-                dlg.ShowDialog();
+                Directory.CreateDirectory(directory);
             }
-            else if(rtbModule.SelectedText == "")
-            {
-
-            }
-            else
-            {
-
-            }
+            return directory;
         }
     }
 }

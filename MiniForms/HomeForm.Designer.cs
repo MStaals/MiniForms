@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rtbModule = new System.Windows.Forms.RichTextBox();
             this.btnExecute = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.lbModules = new System.Windows.Forms.ListBox();
+            this.lbExecute = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // rtbModule
-            // 
-            this.rtbModule.Location = new System.Drawing.Point(12, 12);
-            this.rtbModule.Name = "rtbModule";
-            this.rtbModule.Size = new System.Drawing.Size(188, 288);
-            this.rtbModule.TabIndex = 0;
-            this.rtbModule.Text = "FolderIn\nFolderout\nTextReplace\nMailOut\nConvert\nDecode\nToPDF\nWordTemplate";
-            this.rtbModule.DoubleClick += new System.EventHandler(this.rtbModule_DoubleClick);
             // 
             // btnExecute
             // 
@@ -50,23 +41,44 @@
             this.btnExecute.TabIndex = 1;
             this.btnExecute.Text = "Execute";
             this.btnExecute.UseVisualStyleBackColor = true;
+            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
-            // richTextBox1
+            // lbModules
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(399, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(209, 288);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.lbModules.FormattingEnabled = true;
+            this.lbModules.ItemHeight = 20;
+            this.lbModules.Items.AddRange(new object[] {
+            "Folder-In",
+            "Folder-Out",
+            "Text Replace",
+            "MailOut",
+            "Convert",
+            "Decode",
+            "ToPDF",
+            "WordTemplate"});
+            this.lbModules.Location = new System.Drawing.Point(23, 49);
+            this.lbModules.Name = "lbModules";
+            this.lbModules.Size = new System.Drawing.Size(150, 144);
+            this.lbModules.TabIndex = 3;
+            this.lbModules.DoubleClick += new System.EventHandler(this.lbModules_DoubleClick);
+            // 
+            // lbExecute
+            // 
+            this.lbExecute.FormattingEnabled = true;
+            this.lbExecute.ItemHeight = 20;
+            this.lbExecute.Location = new System.Drawing.Point(468, 49);
+            this.lbExecute.Name = "lbExecute";
+            this.lbExecute.Size = new System.Drawing.Size(150, 104);
+            this.lbExecute.TabIndex = 4;
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.lbExecute);
+            this.Controls.Add(this.lbModules);
             this.Controls.Add(this.btnExecute);
-            this.Controls.Add(this.rtbModule);
             this.Name = "HomeForm";
             this.Text = "HomeForm";
             this.ResumeLayout(false);
@@ -74,9 +86,8 @@
         }
 
         #endregion
-
-        private RichTextBox rtbModule;
         private Button btnExecute;
-        private RichTextBox richTextBox1;
+        private ListBox lbModules;
+        private ListBox lbExecute;
     }
 }
