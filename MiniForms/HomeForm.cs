@@ -1,4 +1,7 @@
-﻿using MiniForms.Modules;
+﻿using MiniForms.Assets;
+using MiniForms.Modules;
+using MiniForms.Modules.FileIn;
+using MiniForms.Modules.FileOut;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,43 +18,43 @@ namespace MiniForms
 {
     public partial class HomeForm : Form
     {
+
+        public List<BaseModule> TaskList = new List<BaseModule>();
+
         public HomeForm()
         {
             InitializeComponent();
         }
 
-        private void lbModules_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            var projectDirectory = generateProjectFolder();
-            var module = new FileInModule("C:\\Temp", projectDirectory);
-            bool result = module.Execute();
 
-            if(result == false)
-            {
-                MessageBox.Show("Uitvoeren niet gelukt!");
-            }
-            
-            
         }
-        private string generateProjectFolder()
+        
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            // Setup desination folder
-            var projectDirectory = Environment.CurrentDirectory;
+            BaseModule newItem = null;
 
-            var folderName = Guid.NewGuid().ToString();
-            string directory = projectDirectory + "\\Process\\" + folderName;
-
-            // Create project folder/directory
-            if (!Directory.Exists(directory))
+            switch (lvModules.SelectedItems[0].Text)
             {
-                Directory.CreateDirectory(directory);
+                case "File In":
+                    EditFileInForm editFileInForm = new EditFileInForm();
+                    editFileInForm.ShowDialog();
+                    break;
+
+                case "File Out":
+                    EditFileOutForm editFileOutForm = new EditFileOutForm();
+                    editFileOutForm.ShowDialog();
+                    break;
             }
-            return directory;
+
+            TaskList.Add(newItem);
+        }
+
+        private void HomeForm_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
