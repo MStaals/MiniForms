@@ -30,9 +30,13 @@
         {
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("File In");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("File Out");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Text replace");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Mail Out");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Converter");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Decrypt");
             this.btnExecute = new System.Windows.Forms.Button();
-            this.lbExecute = new System.Windows.Forms.ListBox();
             this.lvModules = new System.Windows.Forms.ListView();
+            this.lvExecute = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // btnExecute
@@ -46,37 +50,39 @@
             this.btnExecute.UseVisualStyleBackColor = true;
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
-            // lbExecute
-            // 
-            this.lbExecute.FormattingEnabled = true;
-            this.lbExecute.ItemHeight = 15;
-            this.lbExecute.Location = new System.Drawing.Point(418, 37);
-            this.lbExecute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lbExecute.Name = "lbExecute";
-            this.lbExecute.Size = new System.Drawing.Size(132, 109);
-            this.lbExecute.TabIndex = 4;
-            // 
             // lvModules
             // 
             this.lvModules.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
-            listViewItem2});
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
             this.lvModules.Location = new System.Drawing.Point(46, 38);
             this.lvModules.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvModules.Name = "lvModules";
-            this.lvModules.Size = new System.Drawing.Size(180, 117);
+            this.lvModules.Size = new System.Drawing.Size(180, 130);
             this.lvModules.TabIndex = 5;
             this.lvModules.UseCompatibleStateImageBehavior = false;
             this.lvModules.View = System.Windows.Forms.View.SmallIcon;
             this.lvModules.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            // 
+            // lvExecute
+            // 
+            this.lvExecute.Location = new System.Drawing.Point(363, 38);
+            this.lvExecute.Name = "lvExecute";
+            this.lvExecute.Size = new System.Drawing.Size(162, 130);
+            this.lvExecute.TabIndex = 6;
+            this.lvExecute.UseCompatibleStateImageBehavior = false;
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(699, 332);
+            this.Controls.Add(this.lvExecute);
             this.Controls.Add(this.lvModules);
-            this.Controls.Add(this.lbExecute);
             this.Controls.Add(this.btnExecute);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "HomeForm";
@@ -88,7 +94,7 @@
 
         #endregion
         private Button btnExecute;
-        private ListBox lbExecute;
         private ListView lvModules;
+        private ListView lvExecute;
     }
 }

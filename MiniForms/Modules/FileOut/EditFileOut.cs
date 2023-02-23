@@ -24,7 +24,7 @@ namespace MiniForms.Modules.FileOut
 
             string directory = "C:\\Temp";
 
-            
+
             return directory;
         }
 
@@ -35,8 +35,9 @@ namespace MiniForms.Modules.FileOut
             var filepath = string.Empty;
             using (var folderBrowseDialog = new FolderBrowserDialog())
             {
-                if (folderBrowseDialog.ShowDialog() == DialogResult.OK)
+                if (folderBrowseDialog.ShowDialog(this) == DialogResult.OK)
                 {
+                    
                     filepath = folderBrowseDialog.SelectedPath;
                 }
             }
@@ -50,6 +51,11 @@ namespace MiniForms.Modules.FileOut
             {
                 MessageBox.Show("Uitvoeren niet gelukt!");
             }
+            this.Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

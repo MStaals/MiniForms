@@ -1,7 +1,11 @@
 ﻿using MiniForms.Assets;
 using MiniForms.Modules;
+using MiniForms.Modules.Converter;
+using MiniForms.Modules.Decrypt;
 using MiniForms.Modules.FileIn;
 using MiniForms.Modules.FileOut;
+using MiniForms.Modules.MailOut;
+using MiniForms.Modules.TextReplace;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +23,7 @@ namespace MiniForms
     public partial class HomeForm : Form
     {
 
-        public List<BaseModule> TaskList = new List<BaseModule>();
+        //public List<BaseModule> TaskList = new List<BaseModule>();
 
         public HomeForm()
         {
@@ -34,7 +38,7 @@ namespace MiniForms
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            BaseModule newItem = null;
+           // BaseModule newItem = null;
 
             switch (lvModules.SelectedItems[0].Text)
             {
@@ -47,9 +51,25 @@ namespace MiniForms
                     EditFileOutForm editFileOutForm = new EditFileOutForm();
                     editFileOutForm.ShowDialog();
                     break;
+                case "Text replace":
+                    TextReplaceForm textReplaceForm = new TextReplaceForm();
+                    textReplaceForm.ShowDialog();
+                    break;
+                case "Mail Out":
+                    MailOutForm mailOutForm = new MailOutForm();
+                    mailOutForm.ShowDialog();
+                    break;
+                case "Converter":
+                    ConverterForm converterForm = new ConverterForm();
+                    converterForm.ShowDialog();
+                    break;
+                case "Decrypt":
+                    DecryptForm decryptForm = new DecryptForm();
+                    decryptForm.ShowDialog();
+                    break;
             }
 
-            TaskList.Add(newItem);
+            //TaskList.Add(newItem);
         }
 
         private void HomeForm_Load(object sender, EventArgs e)

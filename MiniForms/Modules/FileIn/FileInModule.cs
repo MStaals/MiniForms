@@ -21,26 +21,29 @@ namespace MiniForms.Modules.FileIn
 
         public  bool Execute()
         {
-            // Get first file in directory path
-            var sourceFilePath = Directory.GetFiles(path).FirstOrDefault();
-
-            var destinationFolderPath = projectFolder + "\\";
-            var fileName = Path.GetFileNameWithoutExtension(sourceFilePath);
-            var fileExtension = Path.GetExtension(sourceFilePath);
-
-            if (sourceFilePath == null)
-                return false;
-
-            while (File.Exists(destinationFolderPath + fileName + fileExtension))
+            if (path != "")
             {
-                fileName += " Copy";
+                // Get first file in directory path
+                var sourceFilePath = Directory.GetFiles(path).FirstOrDefault();
+
+                var destinationFolderPath = projectFolder + "\\";
+                var fileName = Path.GetFileNameWithoutExtension(sourceFilePath);
+                var fileExtension = Path.GetExtension(sourceFilePath);
+
+                if (sourceFilePath == null)
+                    return false;
+
+                while (File.Exists(destinationFolderPath + fileName + fileExtension))
+                {
+                    fileName += " Copy";
+                }
+
+                // Move file to temp directory
+                Directory.Move(sourceFilePath, destinationFolderPath + fileName + fileExtension);
+
             }
-
-            // Move file to temp directory
-            Directory.Move(sourceFilePath, destinationFolderPath + fileName + fileExtension);
+                return true;
             
-
-            return true;
         }
        
     }
