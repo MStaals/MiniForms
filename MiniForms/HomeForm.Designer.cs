@@ -34,6 +34,8 @@
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Mail Out");
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Converter");
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Decrypt");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Text to PDF");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Word template");
             this.btnExecute = new System.Windows.Forms.Button();
             this.lvModules = new System.Windows.Forms.ListView();
             this.lvExecute = new System.Windows.Forms.ListView();
@@ -58,11 +60,13 @@
             listViewItem3,
             listViewItem4,
             listViewItem5,
-            listViewItem6});
+            listViewItem6,
+            listViewItem7,
+            listViewItem8});
             this.lvModules.Location = new System.Drawing.Point(46, 38);
             this.lvModules.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvModules.Name = "lvModules";
-            this.lvModules.Size = new System.Drawing.Size(180, 130);
+            this.lvModules.Size = new System.Drawing.Size(180, 138);
             this.lvModules.TabIndex = 5;
             this.lvModules.UseCompatibleStateImageBehavior = false;
             this.lvModules.View = System.Windows.Forms.View.SmallIcon;
@@ -72,7 +76,7 @@
             // 
             this.lvExecute.Location = new System.Drawing.Point(363, 38);
             this.lvExecute.Name = "lvExecute";
-            this.lvExecute.Size = new System.Drawing.Size(162, 130);
+            this.lvExecute.Size = new System.Drawing.Size(162, 138);
             this.lvExecute.TabIndex = 6;
             this.lvExecute.UseCompatibleStateImageBehavior = false;
             // 

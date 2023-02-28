@@ -12,7 +12,7 @@ namespace MiniForms.Modules.FileIn
 {
     public partial class EditFileInForm : Form
     {
-        public EditFileInForm()
+        public EditFileInForm(FileInModule fileIn)
         {
             InitializeComponent();
         }

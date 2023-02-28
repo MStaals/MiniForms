@@ -5,7 +5,9 @@ using MiniForms.Modules.Decrypt;
 using MiniForms.Modules.FileIn;
 using MiniForms.Modules.FileOut;
 using MiniForms.Modules.MailOut;
+using MiniForms.Modules.Text_to_PDF;
 using MiniForms.Modules.TextReplace;
+using MiniForms.Modules.Wordtemplate;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,8 +25,8 @@ namespace MiniForms
     public partial class HomeForm : Form
     {
 
-        //public List<BaseModule> TaskList = new List<BaseModule>();
-
+        public List<object> TaskList = new List<object>();
+        
         public HomeForm()
         {
             InitializeComponent();
@@ -34,17 +36,16 @@ namespace MiniForms
         {
 
         }
-        
+
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-           // BaseModule newItem = null;
+            // BaseModule newItem = null;
 
             switch (lvModules.SelectedItems[0].Text)
             {
                 case "File In":
-                    EditFileInForm editFileInForm = new EditFileInForm();
-                    editFileInForm.ShowDialog();
+                    FileIn();
                     break;
 
                 case "File Out":
@@ -67,6 +68,14 @@ namespace MiniForms
                     DecryptForm decryptForm = new DecryptForm();
                     decryptForm.ShowDialog();
                     break;
+                case "Text to PDF":
+                    TexttoPDFForm texttoPDFForm = new TexttoPDFForm();
+                    texttoPDFForm.ShowDialog();
+                    break;
+                case "Word template":
+                    WordtemplateForm wordTemplateForm = new WordtemplateForm();
+                    wordTemplateForm.ShowDialog();
+                    break;
             }
 
             //TaskList.Add(newItem);
@@ -74,7 +83,15 @@ namespace MiniForms
 
         private void HomeForm_Load(object sender, EventArgs e)
         {
-            
+
+        }
+        private FileInModule FileIn(FileInModule fileInModule = null) 
+        {
+            using(var fi = new EditFileInForm(fileInModule))
+            {
+
+            }
+            return fileInModule;
         }
     }
 }
