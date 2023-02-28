@@ -11,15 +11,13 @@ namespace MiniForms.Modules.FileIn
     public class FileInModule
     {
         public string path;
-        public readonly string projectFolder;
 
-        public FileInModule(string path, string projectFolder)
+        public FileInModule(string path)
         {
             this.path = path;
-            this.projectFolder = projectFolder;
         }
 
-        public  bool Execute()
+        public  bool Execute(string projectFolder)
         {
             if (path != "")
             {

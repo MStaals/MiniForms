@@ -34,7 +34,26 @@ namespace MiniForms
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
+            string projectFolder = generateProjectFolder();
+            // Go through list, execute each module.
+            foreach (var task in TaskList)
+            {
+                if (task is FileInModule fileInModule)
+                {
+                    fileInModule.Execute(projectFolder);
+                    
+                }
+                // TODO: FileOutToevoegen
+               else if(task is FileOutModule fileOutModule)
+                {
+                    fileOutModule.Execute(projectFolder);
+                }
+            }
+            MessageBox.Show("Modules zijn succesvol uitgevoerd");
 
+            // Lists leegmaken
+            TaskList.Clear();
+            lvExecute.Items.Clear();
         }
 
 
@@ -48,9 +67,9 @@ namespace MiniForms
                     FileIn();
                     break;
 
+                    // TODO: gelijk maken met FileIn
                 case "File Out":
-                    EditFileOutForm editFileOutForm = new EditFileOutForm();
-                    editFileOutForm.ShowDialog();
+                    FileOut();
                     break;
                 case "Text replace":
                     TextReplaceForm textReplaceForm = new TextReplaceForm();
@@ -78,20 +97,60 @@ namespace MiniForms
                     break;
             }
 
-            //TaskList.Add(newItem);
+            
         }
 
         private void HomeForm_Load(object sender, EventArgs e)
         {
-
+            btnExecute.Enabled = false;
         }
-        private FileInModule FileIn(FileInModule fileInModule = null) 
+        private string generateProjectFolder()
         {
-            using(var fi = new EditFileInForm(fileInModule))
-            {
+            // Setup desination folder
+            var projectDirectory = Environment.CurrentDirectory;
 
+            var folderName = Guid.NewGuid().ToString();
+            string directory = projectDirectory + "\\Process\\" + folderName;
+
+            // Create project folder/directory
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
             }
-            return fileInModule;
+            return directory;
         }
+        private void FileIn() 
+        {
+            using(var fi = new EditFileInForm())
+            {
+                DialogResult result = fi.ShowDialog();
+
+                if (result == DialogResult.OK && fi.FileInModule != null) 
+                {
+                    // Toevoegen aan de lijst.
+                    TaskList.Add(fi.FileInModule);
+                    lvExecute.Items.Add("FileIn");
+                }
+            }
+        }
+        private void FileOut()
+        {
+            using(var fo = new EditFileOutForm())
+            {
+                DialogResult result = fo.ShowDialog();
+                if(result == DialogResult.OK && fo.FileOutModule != null)
+                {
+                    //Toevoegen aan de lijst.
+                    TaskList.Add(fo.FileOutModule);
+                    lvExecute.Items.Add("FileOut");
+                }
+            }
+        }
+
+        private void lvModules_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnExecute.Enabled = true;
+        }
+        
     }
 }

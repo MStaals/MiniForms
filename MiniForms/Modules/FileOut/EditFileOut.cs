@@ -13,24 +13,16 @@ namespace MiniForms.Modules.FileOut
 {
     public partial class EditFileOutForm : Form
     {
+        // Property toevoegen voor FileOutModule.
+        public FileOutModule FileOutModule { get; private set; }
         public EditFileOutForm()
         {
             InitializeComponent();
         }
 
-        private string generateProjectFolder()
-        {
-            // Setup desination folder
-
-            string directory = "C:\\Temp";
-
-
-            return directory;
-        }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            var projectDirectory = generateProjectFolder();
 
             var filepath = string.Empty;
             using (var folderBrowseDialog = new FolderBrowserDialog())
@@ -39,19 +31,16 @@ namespace MiniForms.Modules.FileOut
                 {
                     
                     filepath = folderBrowseDialog.SelectedPath;
+
+                    var module = new FileOutModule(filepath);
+                    FileOutModule = module;
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
             }
 
-            var module = new FileOutModule(filepath, projectDirectory);
-
-
-            bool result = module.Execute();
-
-            if (result == false)
-            {
-                MessageBox.Show("Uitvoeren niet gelukt!");
-            }
-            this.Close();
+            
         }
 
         private void btnClose_Click(object sender, EventArgs e)

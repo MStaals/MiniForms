@@ -12,34 +12,15 @@ namespace MiniForms.Modules.FileIn
 {
     public partial class EditFileInForm : Form
     {
-        public EditFileInForm(FileInModule fileIn)
+        public FileInModule FileInModule { get; private set; }
+
+        public EditFileInForm()
         {
             InitializeComponent();
         }
 
-        
-        private string generateProjectFolder()
-        {
-            // Setup desination folder
-            var projectDirectory = Environment.CurrentDirectory;
-
-            var folderName = Guid.NewGuid().ToString();
-            string directory = projectDirectory + "\\Process\\" + folderName;
-
-            // Create project folder/directory
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-            return directory;
-        }
-        public void btnExecute_Click(object sender, EventArgs e)
-        {
-            
-        }
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            var projectDirectory = generateProjectFolder();
 
             var filepath = string.Empty;
             using (var folderBrowseDialog = new FolderBrowserDialog())
@@ -47,19 +28,14 @@ namespace MiniForms.Modules.FileIn
                 if (folderBrowseDialog.ShowDialog(this) == DialogResult.OK)
                 {
                     filepath = folderBrowseDialog.SelectedPath;
+
+                    var module = new FileInModule(filepath);
+                    FileInModule = module;
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
             }
-
-            var module = new FileInModule(filepath, projectDirectory);
-
-
-            bool result = module.Execute();
-
-            if (result == false)
-            {
-                MessageBox.Show("Uitvoeren niet gelukt!");
-            }
-            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
