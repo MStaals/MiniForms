@@ -48,6 +48,11 @@ namespace MiniForms
                 {
                     fileOutModule.Execute(projectFolder);
                 }
+                // TODO: TextReplace toevoegen
+                else if(task is TextReplaceModule textReplaceModule)
+                {
+                    textReplaceModule.Execute(projectFolder);
+                }
             }
             MessageBox.Show("Modules zijn succesvol uitgevoerd");
 
@@ -72,8 +77,8 @@ namespace MiniForms
                     FileOut();
                     break;
                 case "Text replace":
-                    TextReplaceForm textReplaceForm = new TextReplaceForm();
-                    textReplaceForm.ShowDialog();
+                    // TODO: Gelijk maken met bovenstaande 
+                    TextReplace();
                     break;
                 case "Mail Out":
                     MailOutForm mailOutForm = new MailOutForm();
@@ -143,6 +148,18 @@ namespace MiniForms
                     //Toevoegen aan de lijst.
                     TaskList.Add(fo.FileOutModule);
                     lvExecute.Items.Add("FileOut");
+                }
+            }
+        }
+        private void TextReplace()
+        {
+            using(var tp = new TextReplaceForm())
+            {
+                DialogResult result = tp.ShowDialog();
+                if(result == DialogResult.OK && tp.TextReplaceModule!= null)
+                {
+                    TaskList.Add(tp.TextReplaceModule);
+                    lvExecute.Items.Add("TextReplace");
                 }
             }
         }

@@ -11,14 +11,10 @@ namespace MiniForms.Modules.FileOut
     public class FileOutModule
     {
         private  string path;
-        // TODO: Project folder mag weg
         public FileOutModule(string path)
         {
             this.path = path;
         }
-
-
-        // TODO: Project folder meegeven
         public bool Execute(string projectFolder)
         {
             if (path != "")

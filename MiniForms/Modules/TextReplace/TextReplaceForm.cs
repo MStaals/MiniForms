@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniForms.Modules.FileIn;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace MiniForms.Modules.TextReplace
 {
     public partial class TextReplaceForm : Form
     {
+        // TODO: Add property for TextReplaceModule
+        public TextReplaceModule TextReplaceModule { get; set; }
         public TextReplaceForm()
         {
             InitializeComponent();
@@ -21,13 +24,11 @@ namespace MiniForms.Modules.TextReplace
         {
             try
             {
-                string str1 = File.ReadAllText(tbPath.Text);
-                string value = str1.Replace(tbOld.Text, tbNew.Text);
-                File.WriteAllText(tbPath.Text, value);
-                MessageBox.Show("Het document is aangepast");
+                TextReplaceModule = new TextReplaceModule(tbOld.Text, tbNew.Text);
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

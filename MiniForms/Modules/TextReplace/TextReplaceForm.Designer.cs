@@ -33,8 +33,6 @@
             this.lblOld = new System.Windows.Forms.Label();
             this.lblNieuw = new System.Windows.Forms.Label();
             this.btnReWrite = new System.Windows.Forms.Button();
-            this.tbPath = new System.Windows.Forms.TextBox();
-            this.lblPath = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -80,22 +78,6 @@
             this.btnReWrite.UseVisualStyleBackColor = true;
             this.btnReWrite.Click += new System.EventHandler(this.btnReWrite_Click);
             // 
-            // tbPath
-            // 
-            this.tbPath.Location = new System.Drawing.Point(23, 73);
-            this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(100, 23);
-            this.tbPath.TabIndex = 5;
-            // 
-            // lblPath
-            // 
-            this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(23, 40);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(31, 15);
-            this.lblPath.TabIndex = 6;
-            this.lblPath.Text = "Path";
-            // 
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(348, 138);
@@ -112,8 +94,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 173);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.lblPath);
-            this.Controls.Add(this.tbPath);
             this.Controls.Add(this.btnReWrite);
             this.Controls.Add(this.lblNieuw);
             this.Controls.Add(this.lblOld);
@@ -133,8 +113,6 @@
         private Label lblOld;
         private Label lblNieuw;
         private Button btnReWrite;
-        private TextBox tbPath;
-        private Label lblPath;
         private Button btnClose;
     }
 }
