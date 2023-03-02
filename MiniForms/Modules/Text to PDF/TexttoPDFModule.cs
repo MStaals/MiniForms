@@ -26,8 +26,6 @@ namespace MiniForms.Modules.Text_to_PDF
                 return true;
             }
             return false;
-
-
         }
     }
 }

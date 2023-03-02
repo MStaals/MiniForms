@@ -23,29 +23,20 @@ namespace MiniForms.Modules.FileOut
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
+            FileOutModule = new FileOutModule();
 
-            var filepath = string.Empty;
-            using (var folderBrowseDialog = new FolderBrowserDialog())
-            {
-                if (folderBrowseDialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    
-                    filepath = folderBrowseDialog.SelectedPath;
-
-                    var module = new FileOutModule(filepath);
-                    FileOutModule = module;
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-            }
-
-            
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
     }
 }
+    
+
+
+
+
+

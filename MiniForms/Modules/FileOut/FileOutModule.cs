@@ -10,17 +10,13 @@ namespace MiniForms.Modules.FileOut
 {
     public class FileOutModule
     {
-        private  string path;
-        public FileOutModule(string path)
-        {
-            this.path = path;
-        }
+       
         public bool Execute(string projectFolder)
         {
-            if (path != "")
+            if (projectFolder != "")
             {
                 // Get all files from path
-                string[] sourceFilePaths = Directory.GetFiles(path);
+                string[] sourceFilePaths = Directory.GetFiles(projectFolder);
 
                 // Loop through the files and copy it
                 foreach (string sourceFilePath in sourceFilePaths)
