@@ -57,6 +57,10 @@ namespace MiniForms
                 {
                     texttoPDFModule.Execute(projectFolder);
                 }
+                else if(task is WordTemplateModule wordTemplateModule)
+                {
+                    wordTemplateModule.Execute(projectFolder);
+                }
                 else
                 {
                     throw new Exception("Module vergeten toe te voegen.");
@@ -104,8 +108,7 @@ namespace MiniForms
                     TexttoPDF();
                     break;
                 case "Word template":
-                    WordtemplateForm wordTemplateForm = new WordtemplateForm();
-                    wordTemplateForm.ShowDialog();
+                    WordTemplate();
                     break;
             }
 
@@ -179,6 +182,18 @@ namespace MiniForms
                 {
                     TaskList.Add(ttpdf.TexttoPDFModule);
                     lvExecute.Items.Add("TexttoPDF");
+                }
+            }
+        }
+        private void WordTemplate()
+        {
+            using(var wt = new WordtemplateForm())
+            {
+                DialogResult result = wt.ShowDialog();
+                if(result == DialogResult.OK && wt.WordTemplateModule != null)
+                {
+                    TaskList.Add(wt.WordTemplateModule);
+                    lvExecute.Items.Add("WordTemplate");
                 }
             }
         }

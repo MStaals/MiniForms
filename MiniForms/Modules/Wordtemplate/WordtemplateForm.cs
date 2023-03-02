@@ -1,6 +1,7 @@
 ﻿using Aspose.Words;
 using Aspose.Words.Reporting;
 using Microsoft.VisualBasic.ApplicationServices;
+using MiniForms.Modules.Text_to_PDF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace MiniForms.Modules.Wordtemplate
 {
     public partial class WordtemplateForm : Form
     {
+        public WordTemplateModule WordTemplateModule { get; set; }
         public WordtemplateForm()
         {
             InitializeComponent();
@@ -23,19 +25,14 @@ namespace MiniForms.Modules.Wordtemplate
 
         private void btnTemplate_Click(object sender, EventArgs e)
         {
-            string[] files = Directory.GetFiles(@"C:\Users\Max Staals\source\repos\MiniForms\MiniForms\bin\Debug\net6.0-windows\Temp\");
-            string MyDir = @"C:\Users\Max Staals\Documents\Template\";
-            
-            
-            Document doc = new Document(MyDir + "DocTemplate.dotx");
+            WordTemplateModule = new WordTemplateModule();
 
-            foreach (string file in files)
-            {
-                doc.AttachedTemplate = MyDir + "DocTemplate.dotx";
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
 
-                doc.Save(file);
-            }
-            MessageBox.Show("Template is succesvol toegepast");
+        private void Close_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }
