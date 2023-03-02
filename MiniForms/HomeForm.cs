@@ -65,9 +65,10 @@ namespace MiniForms
                 {
                     throw new Exception("Module vergeten toe te voegen.");
                 }
+               
             }
             MessageBox.Show("Modules zijn succesvol uitgevoerd");
-
+            Directory.Delete(projectFolder, true);
             // Lists leegmaken
             TaskList.Clear();
             lvExecute.Items.Clear();
@@ -118,6 +119,7 @@ namespace MiniForms
         private void HomeForm_Load(object sender, EventArgs e)
         {
             btnExecute.Enabled = false;
+            btnDelete.Enabled = false;
         }
         private string generateProjectFolder()
         {
@@ -202,6 +204,28 @@ namespace MiniForms
         {
             btnExecute.Enabled = true;
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+            if(lvExecute.SelectedItems != null)
+            {
+                for(int i = 0; i < lvExecute.Items.Count; i++)
+                {
+                    if (lvExecute.Items[i].Selected)
+                    {
+                        lvExecute.Items[i].Remove();
+                        i--;
+                    }
+                }
+            }
+        }
+
+        private void lvExecute_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnDelete.Enabled = true;
+        }
+
         
     }
 }

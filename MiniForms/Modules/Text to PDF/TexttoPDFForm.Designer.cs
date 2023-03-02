@@ -34,7 +34,7 @@
             // 
             // btnConverttoPDF
             // 
-            this.btnConverttoPDF.Location = new System.Drawing.Point(157, 109);
+            this.btnConverttoPDF.Location = new System.Drawing.Point(78, 112);
             this.btnConverttoPDF.Name = "btnConverttoPDF";
             this.btnConverttoPDF.Size = new System.Drawing.Size(75, 23);
             this.btnConverttoPDF.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(486, 112);
+            this.btnClose.Location = new System.Drawing.Point(276, 112);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(632, 188);
+            this.ClientSize = new System.Drawing.Size(381, 188);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnConverttoPDF);
             this.Name = "TexttoPDFForm";

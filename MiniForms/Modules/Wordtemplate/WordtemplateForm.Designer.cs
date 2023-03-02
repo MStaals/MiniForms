@@ -44,7 +44,7 @@
             // 
             // Close
             // 
-            this.Close.Location = new System.Drawing.Point(294, 120);
+            this.Close.Location = new System.Drawing.Point(288, 114);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(75, 23);
             this.Close.TabIndex = 1;

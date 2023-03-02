@@ -39,6 +39,7 @@
             this.btnExecute = new System.Windows.Forms.Button();
             this.lvModules = new System.Windows.Forms.ListView();
             this.lvExecute = new System.Windows.Forms.ListView();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnExecute
@@ -81,12 +82,24 @@
             this.lvExecute.TabIndex = 6;
             this.lvExecute.UseCompatibleStateImageBehavior = false;
             this.lvExecute.View = System.Windows.Forms.View.SmallIcon;
+            this.lvExecute.SelectedIndexChanged += new System.EventHandler(this.lvExecute_SelectedIndexChanged);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(444, 296);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(699, 332);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lvExecute);
             this.Controls.Add(this.lvModules);
             this.Controls.Add(this.btnExecute);
@@ -102,5 +115,6 @@
         private Button btnExecute;
         private ListView lvModules;
         private ListView lvExecute;
+        private Button btnDelete;
     }
 }

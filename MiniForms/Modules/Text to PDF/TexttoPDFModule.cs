@@ -13,14 +13,18 @@ namespace MiniForms.Modules.Text_to_PDF
         {
             // Get files in directory path
             string[] files = Directory.GetFiles(projectFolder);
-
             if (projectFolder != "")
             {
                 foreach (string file in files)
                 {
-                    var doc = new Document(file);
-
-                    doc.Save(file + ".pdf");
+                    var fileExtension = Path.GetExtension(file);
+                    if(fileExtension == ".txt")
+                    {
+                        fileExtension = ".pdf";
+                        var doc = new Document(file);
+                        doc.Save(file + fileExtension);
+                    }
+                   
 
                 }
                 return true;
