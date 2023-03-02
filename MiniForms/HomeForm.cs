@@ -53,6 +53,14 @@ namespace MiniForms
                 {
                     textReplaceModule.Execute(projectFolder);
                 }
+                else if(task is TexttoPDFModule texttoPDFModule)
+                {
+                    texttoPDFModule.Execute(projectFolder);
+                }
+                else
+                {
+                    throw new Exception("Module vergeten toe te voegen.");
+                }
             }
             MessageBox.Show("Modules zijn succesvol uitgevoerd");
 
@@ -93,8 +101,7 @@ namespace MiniForms
                     decryptForm.ShowDialog();
                     break;
                 case "Text to PDF":
-                    TexttoPDFForm texttoPDFForm = new TexttoPDFForm();
-                    texttoPDFForm.ShowDialog();
+                    TexttoPDF();
                     break;
                 case "Word template":
                     WordtemplateForm wordTemplateForm = new WordtemplateForm();
@@ -160,6 +167,18 @@ namespace MiniForms
                 {
                     TaskList.Add(tp.TextReplaceModule);
                     lvExecute.Items.Add("TextReplace");
+                }
+            }
+        }
+        private void TexttoPDF()
+        {
+            using (var ttpdf = new TexttoPDFForm())
+            {
+                DialogResult result = ttpdf.ShowDialog();
+                if(result == DialogResult.OK && ttpdf.TexttoPDFModule != null)
+                {
+                    TaskList.Add(ttpdf.TexttoPDFModule);
+                    lvExecute.Items.Add("TexttoPDF");
                 }
             }
         }

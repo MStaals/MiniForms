@@ -38,7 +38,6 @@ namespace MiniForms.Modules.FileOut
                     }
 
                     // Move file to temp directory
-                    //Directory.Move(sourceFilePath, destinationFolderPath + fileName + fileExtension);
                     File.Copy(sourceFilePath, destinationFolderPath + fileName + fileExtension);
                 }
             }

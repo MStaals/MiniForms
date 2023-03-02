@@ -80,6 +80,7 @@
             this.lvExecute.Size = new System.Drawing.Size(162, 138);
             this.lvExecute.TabIndex = 6;
             this.lvExecute.UseCompatibleStateImageBehavior = false;
+            this.lvExecute.View = System.Windows.Forms.View.SmallIcon;
             // 
             // HomeForm
             // 

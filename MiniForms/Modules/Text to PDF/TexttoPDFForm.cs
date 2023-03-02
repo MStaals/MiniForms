@@ -10,33 +10,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aspose.Words;
 using Aspose.Words.Drawing;
+using MiniForms.Modules.TextReplace;
 using static MiniForms.Modules.Decrypt.DecryptForm;
 
 namespace MiniForms.Modules.Text_to_PDF
 {
     public partial class TexttoPDFForm : Form
     {
+        public TexttoPDFModule TexttoPDFModule { get; set; }
         public TexttoPDFForm()
         {
             InitializeComponent();
         }
-
-        public void converttxttoPDF(string sourcePath, string destPath)
-        {
-
-        }
-
         private void btnConverttoPDF_Click_1(object sender, EventArgs e)
         {
-            string[] files = Directory.GetFiles(@"C:\Users\Max Staals\source\repos\MiniForms\MiniForms\bin\Debug\net6.0-windows\Temp\");
+            TexttoPDFModule = new TexttoPDFModule();
 
-            foreach (string file in files)
-            {
-                var doc = new Document(file);
-
-                doc.Save(file + ".pdf");
-            }
-            MessageBox.Show("documenten zijn geconverteerd");
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
