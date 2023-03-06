@@ -1,5 +1,4 @@
-﻿using MiniForms.Assets;
-using MiniForms.Modules;
+﻿using MiniForms.Modules;
 using MiniForms.Modules.Converter;
 using MiniForms.Modules.Decrypt;
 using MiniForms.Modules.FileIn;
@@ -61,13 +60,25 @@ namespace MiniForms
                 {
                     wordTemplateModule.Execute(projectFolder);
                 }
+                else if(task is MailOutModule mailOutModule)
+                {
+                    mailOutModule.Execute();
+                }
+                else if(task is ConvertModule convertModule)
+                {
+                    convertModule.Execute(projectFolder);
+                }
+                else if (task is DecryptModule decryptModule)
+                {
+                    decryptModule.Execute(projectFolder);
+                }
                 else
                 {
                     throw new Exception("Module vergeten toe te voegen.");
                 }
                
             }
-            MessageBox.Show("Modules zijn succesvol uitgevoerd");
+            MessageBox.Show("Module(s) zijn succesvol uitgevoerd");
             Directory.Delete(projectFolder, true);
             // Lists leegmaken
             TaskList.Clear();
@@ -85,25 +96,20 @@ namespace MiniForms
                     FileIn();
                     break;
 
-                    // TODO: gelijk maken met FileIn
                 case "File Out":
                     FileOut();
                     break;
                 case "Text replace":
-                    // TODO: Gelijk maken met bovenstaande 
                     TextReplace();
                     break;
                 case "Mail Out":
-                    MailOutForm mailOutForm = new MailOutForm();
-                    mailOutForm.ShowDialog();
+                    MailOut();
                     break;
                 case "Converter":
-                    ConverterForm converterForm = new ConverterForm();
-                    converterForm.ShowDialog();
+                    Convert();
                     break;
                 case "Decrypt":
-                    DecryptForm decryptForm = new DecryptForm();
-                    decryptForm.ShowDialog();
+                    Decrypt();
                     break;
                 case "Text to PDF":
                     TexttoPDF();
@@ -196,6 +202,42 @@ namespace MiniForms
                 {
                     TaskList.Add(wt.WordTemplateModule);
                     lvExecute.Items.Add("WordTemplate");
+                }
+            }
+        }
+        private void MailOut()
+        {
+            using(var mo = new MailOutForm())
+            {
+                DialogResult result = mo.ShowDialog();
+                if(result == DialogResult.OK && mo.MailOutModule != null)
+                {
+                    TaskList.Add(mo.MailOutModule);
+                    lvExecute.Items.Add("MailOut");
+                }
+            }
+        }
+        private void Convert()
+        {
+            using (var co = new ConverterForm())
+            {
+                DialogResult result = co.ShowDialog();
+                if(result == DialogResult.OK && co.ConvertModule != null)
+                {
+                    TaskList.Add(co.ConvertModule);
+                    lvExecute.Items.Add("Convert");
+                }
+            }
+        }
+        private void Decrypt()
+        {
+            using(var dec = new DecryptForm())
+            {
+                DialogResult result = dec.ShowDialog();
+                if(result == DialogResult.OK && dec.DecryptModule != null)
+                {
+                    TaskList.Add(dec.DecryptModule);
+                    lvExecute.Items.Add("Decrypt");
                 }
             }
         }

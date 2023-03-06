@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MiniForms.Modules.TextReplace
@@ -31,9 +32,15 @@ namespace MiniForms.Modules.TextReplace
 
                 foreach (string file in files)
                 {
-                    string text = File.ReadAllText(file);
-                    string value = text.Replace(wordToReplace, replacementWord);
-                    File.WriteAllText(file, value);
+                    var fileExtension = Path.GetExtension(file);
+                    if(fileExtension == ".txt")
+                    {
+                        string text = File.ReadAllText(file);
+                        text = Regex.Replace(text, @"(?:(?<=^|\s)(?=\S|$)|(?<=^|\S)(?=\s|$))" + wordToReplace + @"(?:(?<=^|\s)(?=\S|$)|(?<=^|\S)(?=\s|$))", replacementWord);
+                        
+                        File.WriteAllText(file, text);
+                    }
+                    
                 }
                 return true;
             }

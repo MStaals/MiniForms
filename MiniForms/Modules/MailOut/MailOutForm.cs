@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using MiniForms.Modules.Text_to_PDF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,7 @@ namespace MiniForms.Modules.MailOut
 {
     public partial class MailOutForm : Form
     {
+        public MailOutModule MailOutModule { get; set; }
         public MailOutForm()
         {
             InitializeComponent();
@@ -29,65 +32,36 @@ namespace MiniForms.Modules.MailOut
         {
             try
             {
-                MailAddress to = new MailAddress(tbSendTo.Text);
-                MailAddress from = new MailAddress(tbSender.Text);
-
-                MailMessage email = new MailMessage(from, to);
-                
-               
-
-                if (tbBcc.Text != "")
-                {
-                    email.Bcc.Add(tbBcc.Text);
-                }
-                if (tbCc.Text != "")
-                {
-                    email.CC.Add(tbCc.Text);
-                }
-
-                if(tbMailtext.Text != "")
-                {
-                    email.Body = tbMailtext.Text;
-                }
-                else
+                if (tbSender.Text == "")
                 {
                     MessageBox.Show("Niet alle velden zijn ingevuld");
                     return;
                 }
-
-                if(tbSubject.Text != "")
-                {
-                    email.Subject = tbSubject.Text;
-                    
-                }
-                else
+                if (tbSendTo.Text == "")
                 {
                     MessageBox.Show("Niet alle velden zijn ingevuld");
                     return;
                 }
-
-
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp-relay.sendinblue.com";
-                smtp.Port = 587;
-                smtp.Credentials = new NetworkCredential("max.staals@gmail.com", "pI0XbDS4MAwKjaQh");
-                // smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.EnableSsl = true;
-
-                try
+                if (tbMailtext.Text == "")
                 {
-                    smtp.Send(email);
+                    MessageBox.Show("Niet alle velden zijn ingevuld");
+                    return;
+                }
+                else
+                {
+                    MailOutModule = new MailOutModule(tbSendTo.Text, tbSender.Text, tbBcc.Text, tbCc.Text, tbMailtext.Text, tbSubject.Text);
+                    MessageBox.Show("Mail versturen gelukt");
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
-                catch (SmtpException ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
+               
             }
             catch
             {
                 MessageBox.Show("Niet alle velden zijn ingevuld");
             }
+
+            
         }
     }
 }

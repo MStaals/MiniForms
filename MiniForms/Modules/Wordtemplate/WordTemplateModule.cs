@@ -1,4 +1,5 @@
 ﻿using Aspose.Words;
+using Aspose.Words.Reporting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +12,28 @@ namespace MiniForms.Modules.Wordtemplate
     {
         public bool Execute(string projectFolder)
         {
-            // Get files in directory path
             string[] files = Directory.GetFiles(projectFolder);
-            string MyDir = @"C:\Users\Max Staals\Documents\Template\";
-            Document doc = new Document(MyDir + "DocTemplate.dotx");
-
-            if (projectFolder != "")
+            for (int i = 0; i < files.Length; i++)
             {
-                foreach (string file in files)
+                string MyDir = @"C:\Users\Max Staals\Documents\Template\";
+                Document docTemplate = new(MyDir + "DocTemplate.dotx");
+                Document doc = new(files[i]);
+                DocumentBuilder builder = new(docTemplate);
+                builder.Write(doc.Document.GetText());
+
+                if (projectFolder != "")
                 {
-                    doc.AttachedTemplate = MyDir + "DocTemplate.dotx";
-                    doc.Save(file);
+                    foreach (string file in files)
+                    {
+                        var fileExtension = Path.GetExtension(file);
+                        if (fileExtension == ".docx")
+                        {
+                            ReportingEngine engine = new();
+                            engine.BuildReport(docTemplate, builder);
+                            docTemplate.Save(files[i]);
+                        }
+                    }
                 }
-                return true;
             }
             return false;
         }

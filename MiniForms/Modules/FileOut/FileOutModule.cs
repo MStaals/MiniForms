@@ -1,5 +1,4 @@
-﻿using MiniForms.Assets;
-using MiniForms.Modules.FileIn;
+﻿using MiniForms.Modules.FileIn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
