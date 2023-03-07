@@ -9,26 +9,26 @@ namespace MiniForms.Modules.TextReplace
 {
     public class TextReplaceModule
     {
-        private string wordToReplace;
+        private string  _wordToReplace;
 
-        private string replacementWord;
+        private string _replacementWord;
 
 
-        public TextReplaceModule(string wordToReplace, string replacementWord)
+        public TextReplaceModule(string WordToReplace, string ReplacementWord)
         {
-            ArgumentNullException.ThrowIfNull(wordToReplace);
-            ArgumentNullException.ThrowIfNull(replacementWord);
+            ArgumentNullException.ThrowIfNull(WordToReplace);
+            ArgumentNullException.ThrowIfNull(ReplacementWord);
 
 
-            this.replacementWord = replacementWord;
-            this.wordToReplace = wordToReplace;
+            this._replacementWord = ReplacementWord;
+            this._wordToReplace = WordToReplace;
         }
-        public bool Execute(string projectFolder)
+        public bool Execute(string ProjectFolder)
         {
-            if (string.IsNullOrEmpty(replacementWord) == false || string.IsNullOrEmpty(wordToReplace))
+            if (string.IsNullOrEmpty(_replacementWord) == false || string.IsNullOrEmpty(_wordToReplace))
             {
                 // Get file in directory path
-                string[] files = Directory.GetFiles(projectFolder);
+                string[] files = Directory.GetFiles(ProjectFolder);
 
                 foreach (string file in files)
                 {
@@ -36,7 +36,7 @@ namespace MiniForms.Modules.TextReplace
                     if(fileExtension == ".txt")
                     {
                         string text = File.ReadAllText(file);
-                        text = Regex.Replace(text, @"(?:(?<=^|\s)(?=\S|$)|(?<=^|\S)(?=\s|$))" + wordToReplace + @"(?:(?<=^|\s)(?=\S|$)|(?<=^|\S)(?=\s|$))", replacementWord);
+                        text = Regex.Replace(text, @"(?:(?<=^|\s)(?=\S|$)|(?<=^|\S)(?=\s|$))" + _wordToReplace + @"(?:(?<=^|\s)(?=\S|$)|(?<=^|\S)(?=\s|$))", _replacementWord);
                         
                         File.WriteAllText(file, text);
                     }

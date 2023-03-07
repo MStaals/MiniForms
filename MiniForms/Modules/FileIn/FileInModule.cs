@@ -9,23 +9,23 @@ namespace MiniForms.Modules.FileIn
 {
     public class FileInModule
     {
-        public string path;
+        public string Path;
 
         public FileInModule(string path)
         {
-            this.path = path;
+            this.Path = path;
         }
 
-        public  bool Execute(string projectFolder)
+        public  bool Execute(string ProjectFolder)
         {
-            if (path != "")
+            if (Path != "")
             {
                 // Get first file in directory path
-                var sourceFilePath = Directory.GetFiles(path).FirstOrDefault();
+                var sourceFilePath = Directory.GetFiles(Path).FirstOrDefault();
 
-                var destinationFolderPath = projectFolder + "\\";
-                var fileName = Path.GetFileNameWithoutExtension(sourceFilePath);
-                var fileExtension = Path.GetExtension(sourceFilePath);
+                var destinationFolderPath = ProjectFolder + "\\";
+                var fileName = System.IO.Path.GetFileNameWithoutExtension(sourceFilePath);
+                var fileExtension = System.IO.Path.GetExtension(sourceFilePath);
 
                 if (sourceFilePath == null)
                     return false;

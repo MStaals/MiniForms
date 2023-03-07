@@ -10,10 +10,10 @@ namespace MiniForms.Modules.Decrypt
 {
     public class DecryptModule
     {
-        private string password { get; set; }
-        public DecryptModule(string password)
+        private string _password { get; set; }
+        public DecryptModule(string Password)
         {
-            this.password = password;
+            this._password = Password;
         }
         public class CoreDecryption
         {
@@ -50,30 +50,38 @@ namespace MiniForms.Modules.Decrypt
         }
         public class DecryptionFile
         {
-            public void DecryptFile(string fileEncrypted, string password)
+            public void DecryptFile(string FileEncrypted, string Password)
             {
-                byte[] bytesToBeDecrypted = File.ReadAllBytes(fileEncrypted);
-                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-                passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+                try
+                {
+                    byte[] bytesToBeDecrypted = File.ReadAllBytes(FileEncrypted);
+                    byte[] passwordBytes = Encoding.UTF8.GetBytes(Password);
+                    passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
-                byte[] bytesDecrypted = CoreDecryption.AES_Decrypt(bytesToBeDecrypted, passwordBytes);
+                    byte[] bytesDecrypted = CoreDecryption.AES_Decrypt(bytesToBeDecrypted, passwordBytes);
 
-                string file = fileEncrypted;
-                File.WriteAllBytes(file, bytesDecrypted);
+                    string file = FileEncrypted;
+                    File.WriteAllBytes(file, bytesDecrypted);
+                }
+                catch
+                {
+                    MessageBox.Show("Decryption mislukt");
+                }
+                
 
             }
         }
-        public bool Execute(string projectFolder)
+        public bool Execute(string ProjectFolder)
         {
-            string[] files = Directory.GetFiles(projectFolder);
+            string[] files = Directory.GetFiles(ProjectFolder);
 
-            if (projectFolder != "")
+            if (ProjectFolder != "")
             {
                 foreach (string file in files)
                 {
                     DecryptionFile dec = new DecryptionFile();
 
-                    string bytePassword = password;
+                    string bytePassword = _password;
 
                     dec.DecryptFile(file, bytePassword);
 

@@ -23,9 +23,9 @@ namespace MiniForms.Modules.FileIn
         {
 
             var filepath = string.Empty;
-            using (var folderBrowseDialog = new OpenFileDialog())
+            using (var folderBrowseDialog = new FolderBrowserDialog())
             {
-                if (OpenFileDialog openFileDialog == new OpenFileDialog)
+                if (folderBrowseDialog.ShowDialog(this) == DialogResult.OK)
                 {
                     filepath = folderBrowseDialog.SelectedPath;
 

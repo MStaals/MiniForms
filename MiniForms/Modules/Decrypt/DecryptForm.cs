@@ -26,7 +26,7 @@ namespace MiniForms.Modules.Decrypt
             if (tbPassword.Text != "")
             {
                 DecryptModule = new DecryptModule(tbPassword.Text);
-                MessageBox.Show("Decryption succesvol");
+                MessageBox.Show("Decryption key succesvol ingesteld");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

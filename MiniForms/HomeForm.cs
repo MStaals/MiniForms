@@ -34,6 +34,7 @@ namespace MiniForms
         private void btnExecute_Click(object sender, EventArgs e)
         {
             string projectFolder = generateProjectFolder();
+
             // Go through list, execute each module.
             foreach (var task in TaskList)
             {
@@ -42,12 +43,10 @@ namespace MiniForms
                     fileInModule.Execute(projectFolder);
                     
                 }
-                // TODO: FileOutToevoegen
                else if(task is FileOutModule fileOutModule)
                 {
                     fileOutModule.Execute(projectFolder);
                 }
-                // TODO: TextReplace toevoegen
                 else if(task is TextReplaceModule textReplaceModule)
                 {
                     textReplaceModule.Execute(projectFolder);
@@ -80,6 +79,7 @@ namespace MiniForms
             }
             MessageBox.Show("Module(s) zijn succesvol uitgevoerd");
             Directory.Delete(projectFolder, true);
+
             // Lists leegmaken
             TaskList.Clear();
             lvExecute.Items.Clear();
@@ -88,7 +88,6 @@ namespace MiniForms
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            // BaseModule newItem = null;
 
             switch (lvModules.SelectedItems[0].Text)
             {
@@ -117,6 +116,8 @@ namespace MiniForms
                 case "Word template":
                     WordTemplate();
                     break;
+                default:
+                    throw new InvalidOperationException("Geen geldig item gevonden");
             }
 
             
@@ -249,7 +250,7 @@ namespace MiniForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            //Listview item verwijderen uit execute list
             if(lvExecute.SelectedItems != null)
             {
                 for(int i = 0; i < lvExecute.Items.Count; i++)

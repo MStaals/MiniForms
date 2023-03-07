@@ -25,7 +25,7 @@ namespace MiniForms.Modules.Converter
             if(tbPassword.Text != "")
             {
                 ConvertModule = new ConvertModule(tbPassword.Text);
-                MessageBox.Show("Encryption succesvol");
+                MessageBox.Show("Encryption key succesvol ingesteld");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

@@ -10,45 +10,41 @@ namespace MiniForms.Modules.MailOut
 {
     public class MailOutModule
     {
-        private string sendTo { get; set; }
-        private string sender { get; set; }
-        private string bcc { get; set; }
-        private string cc { get; set; }
-        private string mailText { get; set; }
-        private string subject { get; set; }
+        private string _sendTo { get; set; }
+        private string _sender { get; set; }
+        private string _bcc { get; set; }
+        private string _cc { get; set; }
+        private string _mailText { get; set; }
+        private string _subject { get; set; }
 
-        public MailOutModule(string SendTo, string sender, string bcc, string cc, string mailText, string subject)
+        public MailOutModule(string SendTo, string Sender, string Bcc, string Cc, string MailText, string Subject)
         {
-            this.sendTo = SendTo;
-            this.sender = sender;
-            this.bcc = bcc;
-            this.cc = cc;
-            this.mailText = mailText;
-            this.subject = subject;
+            this._sendTo = SendTo;
+            this._sender = Sender;
+            this._bcc = Bcc;
+            this._cc = Cc;
+            this._mailText = MailText;
+            this._subject = Subject;
         }
         public bool Execute()
         {
 
-            MailAddress to = new MailAddress(sendTo);
-            MailAddress from = new MailAddress(sender);
+            MailAddress to = new MailAddress(_sendTo);
+            MailAddress from = new MailAddress(_sender);
 
             MailMessage email = new MailMessage(from, to);
 
-            if( ! string.IsNullOrEmpty(bcc))
+            if( ! string.IsNullOrEmpty(_bcc))
             {
-                email.Bcc.Add(bcc);
+                email.Bcc.Add(_bcc);
             }
-            if (!string.IsNullOrEmpty(cc))
+            if (!string.IsNullOrEmpty(_cc))
             {
-                email.CC.Add(cc);
+                email.CC.Add(_cc);
             }
            
-            email.Body = mailText;
-            email.Subject = subject;
-
-
-
-
+            email.Body = _mailText;
+            email.Subject = _subject;
 
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp-relay.sendinblue.com";

