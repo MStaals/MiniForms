@@ -16,14 +16,14 @@ namespace MiniForms.Modules.FileIn
             this.Path = path;
         }
 
-        public  bool Execute(string ProjectFolder)
+        public  bool Execute(string projectFolder)
         {
             if (Path != "")
             {
                 // Get first file in directory path
                 var sourceFilePath = Directory.GetFiles(Path).FirstOrDefault();
 
-                var destinationFolderPath = ProjectFolder + "\\";
+                var destinationFolderPath = projectFolder + "\\";
                 var fileName = System.IO.Path.GetFileNameWithoutExtension(sourceFilePath);
                 var fileExtension = System.IO.Path.GetExtension(sourceFilePath);
 

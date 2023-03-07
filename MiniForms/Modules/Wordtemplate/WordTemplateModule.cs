@@ -10,9 +10,9 @@ namespace MiniForms.Modules.Wordtemplate
 {
     public class WordTemplateModule
     {
-        public bool Execute(string ProjectFolder)
+        public bool Execute(string projectFolder)
         {
-            string[] files = Directory.GetFiles(ProjectFolder);
+            string[] files = Directory.GetFiles(projectFolder);
             for (int i = 0; i < files.Length; i++)
             {
                 string MyDir = @"C:\Users\Max Staals\Documents\Template\";
@@ -21,7 +21,7 @@ namespace MiniForms.Modules.Wordtemplate
                 DocumentBuilder builder = new(docTemplate);
                 builder.Write(doc.Document.GetText());
 
-                if (ProjectFolder != "")
+                if (projectFolder != "")
                 {
                     foreach (string file in files)
                     {

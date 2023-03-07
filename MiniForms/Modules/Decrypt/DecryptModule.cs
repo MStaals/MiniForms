@@ -11,9 +11,9 @@ namespace MiniForms.Modules.Decrypt
     public class DecryptModule
     {
         private string _password { get; set; }
-        public DecryptModule(string Password)
+        public DecryptModule(string password)
         {
-            this._password = Password;
+            this._password = password;
         }
         public class CoreDecryption
         {
@@ -50,17 +50,17 @@ namespace MiniForms.Modules.Decrypt
         }
         public class DecryptionFile
         {
-            public void DecryptFile(string FileEncrypted, string Password)
+            public void DecryptFile(string fileEncrypted, string password)
             {
                 try
                 {
-                    byte[] bytesToBeDecrypted = File.ReadAllBytes(FileEncrypted);
-                    byte[] passwordBytes = Encoding.UTF8.GetBytes(Password);
+                    byte[] bytesToBeDecrypted = File.ReadAllBytes(fileEncrypted);
+                    byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
                     passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
                     byte[] bytesDecrypted = CoreDecryption.AES_Decrypt(bytesToBeDecrypted, passwordBytes);
 
-                    string file = FileEncrypted;
+                    string file = fileEncrypted;
                     File.WriteAllBytes(file, bytesDecrypted);
                 }
                 catch
@@ -71,11 +71,11 @@ namespace MiniForms.Modules.Decrypt
 
             }
         }
-        public bool Execute(string ProjectFolder)
+        public bool Execute(string projectFolder)
         {
-            string[] files = Directory.GetFiles(ProjectFolder);
+            string[] files = Directory.GetFiles(projectFolder);
 
-            if (ProjectFolder != "")
+            if (projectFolder != "")
             {
                 foreach (string file in files)
                 {

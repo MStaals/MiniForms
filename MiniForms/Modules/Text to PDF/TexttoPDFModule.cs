@@ -9,11 +9,11 @@ namespace MiniForms.Modules.Text_to_PDF
 {
     public class TexttoPDFModule
     {
-        public bool Execute(string ProjectFolder)
+        public bool Execute(string projectFolder)
         {
             // Get files in directory path
-            string[] files = Directory.GetFiles(ProjectFolder);
-            if (ProjectFolder != "")
+            string[] files = Directory.GetFiles(projectFolder);
+            if (projectFolder != "")
             {
                 foreach (string file in files)
                 {

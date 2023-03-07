@@ -17,14 +17,14 @@ namespace MiniForms.Modules.MailOut
         private string _mailText { get; set; }
         private string _subject { get; set; }
 
-        public MailOutModule(string SendTo, string Sender, string Bcc, string Cc, string MailText, string Subject)
+        public MailOutModule(string sendTo, string sender, string bcc, string cc, string mailText, string subject)
         {
-            this._sendTo = SendTo;
-            this._sender = Sender;
-            this._bcc = Bcc;
-            this._cc = Cc;
-            this._mailText = MailText;
-            this._subject = Subject;
+            this._sendTo = sendTo;
+            this._sender = sender;
+            this._bcc = bcc;
+            this._cc = cc;
+            this._mailText = mailText;
+            this._subject = subject;
         }
         public bool Execute()
         {

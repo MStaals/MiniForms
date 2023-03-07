@@ -14,21 +14,21 @@ namespace MiniForms.Modules.TextReplace
         private string _replacementWord;
 
 
-        public TextReplaceModule(string WordToReplace, string ReplacementWord)
+        public TextReplaceModule(string wordToReplace, string replacementWord)
         {
-            ArgumentNullException.ThrowIfNull(WordToReplace);
-            ArgumentNullException.ThrowIfNull(ReplacementWord);
+            ArgumentNullException.ThrowIfNull(wordToReplace);
+            ArgumentNullException.ThrowIfNull(replacementWord);
 
 
-            this._replacementWord = ReplacementWord;
-            this._wordToReplace = WordToReplace;
+            this._replacementWord = replacementWord;
+            this._wordToReplace = wordToReplace;
         }
-        public bool Execute(string ProjectFolder)
+        public bool Execute(string projectFolder)
         {
             if (string.IsNullOrEmpty(_replacementWord) == false || string.IsNullOrEmpty(_wordToReplace))
             {
                 // Get file in directory path
-                string[] files = Directory.GetFiles(ProjectFolder);
+                string[] files = Directory.GetFiles(projectFolder);
 
                 foreach (string file in files)
                 {
